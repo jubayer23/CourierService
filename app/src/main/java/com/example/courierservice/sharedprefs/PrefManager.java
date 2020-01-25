@@ -11,6 +11,7 @@ import com.example.courierservice.appdata.MydApplication;
 import com.example.courierservice.model.PendingOrder;
 import com.example.courierservice.model.User;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class PrefManager {
     private static final String KEY_LOG = "key_log";
     private static final String KEY_EMAIL_CACHE = "key_email_cache";
     private static final String KEY_ONGOING_ORDER = "key_ongoing_order";
+    private static final String KEY_NOTI_ORDER_NUMBER = "KEY_NOTI_ORDER_NUMBER";
 
     public PrefManager(Context context) {
         this._context = context;
@@ -79,7 +81,7 @@ public class PrefManager {
         editor.commit();
     }
 
-    public User getUserInfo() {
+    public User getUser() {
         String json = pref.getString(KEY_USER, "");
 
         if (!json.isEmpty()) {
@@ -107,6 +109,32 @@ public class PrefManager {
             return MydApplication.gson.fromJson(json, PendingOrder.class);
         } else
             return null;
+    }
+
+
+    public ArrayList<Integer> getNotiOrderNumber() {
+
+        ArrayList<Integer> shops = new ArrayList<>();
+
+        String gson = pref.getString(KEY_NOTI_ORDER_NUMBER, "");
+
+        if (gson.isEmpty()) return shops;
+
+        Type type = new TypeToken<List<Integer>>() {
+        }.getType();
+        shops = GSON.fromJson(gson, type);
+
+        return shops;
+    }
+
+
+    public void setNotiOrderNumber(ArrayList<Integer> obj) {
+        editor = pref.edit();
+
+        editor.putString(KEY_NOTI_ORDER_NUMBER, GSON.toJson(obj));
+
+        // commit changes
+        editor.commit();
     }
 
 

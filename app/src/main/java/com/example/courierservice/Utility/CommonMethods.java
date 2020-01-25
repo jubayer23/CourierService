@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by jubayer on 5/11/2017.
@@ -183,5 +184,10 @@ public class CommonMethods {
 
     public static long getCurrentTimeInMiliSecs(){
         return System.currentTimeMillis();
+    }
+
+    private final static AtomicInteger c = new AtomicInteger(0);
+    public static int getID() {
+        return c.incrementAndGet();
     }
 }

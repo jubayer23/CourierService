@@ -55,6 +55,16 @@
                             android:text="Rose Rose Rose"
                             style="@style/txtNormal"/>
 
+                        <TextView
+                            android:id="@+id/tv_new"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:text="NEW"
+                            style="@style/txtNormal"
+                            android:textColor="@color/red_dark"/>
+
+
                     </LinearLayout>
 
                     <LinearLayout

@@ -4,160 +4,210 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/txtHeading"
-        android:gravity="center"
-        android:layout_margin="5dp"
-        android:text="Ogoing order"/>
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/gray_lightest"
-        android:orientation="horizontal">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/ll_container_ongoing_false">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="wrap_content"
-            style="@style/txtTitle"
-            android:text="Order Number"/>
-
-        <TextView
-            android:id="@+id/tv_order_number"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
             style="@style/txtNormal"
-            android:text="12345"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="wrap_content"
-            style="@style/txtTitle"
-            android:text="Destination"/>
-
-        <TextView
-            android:id="@+id/tv_order_destination"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:layout_height="wrap_content"
-            style="@style/txtNormal"
-            android:text="7 Chapmen Street, E1 2NN, London, Uk"/>
+            android:padding="10dp"
+            android:text="There is no ongoing order. Please start a order from pending order list"/>
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/gray_lightest"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="wrap_content"
-            style="@style/txtTitle"
-            android:text="Picked Time"/>
-
-        <TextView
-            android:id="@+id/tv_picked_time"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:layout_height="wrap_content"
-            style="@style/txtNormal"
-            android:text="11.30 AM 19th Oct"/>
-    </LinearLayout>
 
     <LinearLayout
+
+        android:id="@+id/ll_container_ongoing_true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
 
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/txtTitle"
-            android:text="Deadline"/>
+            style="@style/txtHeading"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:text="Ogoing order"/>
 
-        <TextView
-            android:id="@+id/tv_deadline"
-            android:layout_width="0dp"
-            android:layout_weight="6"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/txtNormal"
-            android:text="11th Oct"/>
+
+            android:gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:background="@color/gray_lightest"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                style="@style/txtTitle"
+                android:text="Order Number"/>
+
+            <TextView
+                android:id="@+id/tv_order_number"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                style="@style/txtNormal"
+                android:text="12345"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                style="@style/txtTitle"
+                android:text="Destination"/>
+
+            <TextView
+                android:id="@+id/tv_destination_address"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                style="@style/txtNormal"
+                android:text="7 Chapmen Street, E1 2NN, London, Uk"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:background="@color/gray_lightest"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                style="@style/txtTitle"
+                android:text="Picked Time"/>
+
+            <TextView
+                android:id="@+id/tv_picked_time"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                style="@style/txtNormal"
+                android:text="11.30 AM 19th Oct"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                style="@style/txtTitle"
+                android:text="Deadline"/>
+
+            <TextView
+                android:id="@+id/tv_deadline"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                style="@style/txtNormal"
+                android:text="11th Oct"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:background="@color/gray_lightest"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                style="@style/txtTitle"
+                android:text="Instruction"/>
+
+            <TextView
+                android:id="@+id/tv_instruction"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                style="@style/txtNormal"
+                android:text="There is no instruction available"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_selector_blue_deep_square"
+                android:id="@+id/btn_show_map"
+                android:text="Show Route"
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_selector_green_square"
+                android:id="@+id/btn_order_complete"
+                android:text="Complete Order"
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/gray_lightest"
-        android:orientation="horizontal">
 
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="wrap_content"
-            style="@style/txtTitle"
-            android:text="Instruction"/>
-
-        <TextView
-            android:id="@+id/tv_instruction"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:layout_height="wrap_content"
-            style="@style/txtNormal"
-            android:text="There is no instruction available"/>
-    </LinearLayout>
-
-
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/btn_selector_blue_deep_round"
-        android:id="@+id/btn_show_map"
-        android:text="Show Route"
-        android:textSize="18sp"
-        android:textColor="@color/white"/>
-
-
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/btn_selector_green_square"
-        android:id="@+id/btn_order_complete"
-        android:text="Complete Order"
-        android:textSize="18sp"
-        android:textColor="@color/white"/>
 </LinearLayout>

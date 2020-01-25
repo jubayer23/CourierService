@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.courierservice.R;
+import com.example.courierservice.Utility.CommonMethods;
+import com.example.courierservice.appdata.GlobalAppAccess;
+import com.example.courierservice.appdata.MydApplication;
 import com.example.courierservice.model.PendingOrder;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv_order_number, tv_pickup, tv_destination, tv_due_date;
+        TextView tv_order_number, tv_pickup, tv_destination, tv_due_date, tv_new;
         Button  btn_details, btn_route, btn_start;
         CardView item_container;
 
@@ -42,10 +45,12 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
             tv_destination = view.findViewById(R.id.tv_destination_address);
 
             tv_due_date = view.findViewById(R.id.tv_due_date);
+            tv_new = view.findViewById(R.id.tv_new);
 
 
             btn_details = view.findViewById(R.id.btn_details);
             btn_route = view.findViewById(R.id.btn_route);
+            btn_start = view.findViewById(R.id.btn_start);
             btn_start = view.findViewById(R.id.btn_start);
 
         }
@@ -108,7 +113,15 @@ public class PendingOrderAdapter extends RecyclerView.Adapter<PendingOrderAdapte
         holder.tv_destination.setText(rawStock.getDropOffAddress());
         holder.tv_due_date.setText(String.valueOf(rawStock.getDueTime()));
 
+        holder.tv_due_date.setText(CommonMethods.getDateInStringFromMillis(String.valueOf(rawStock.getDueTime()), GlobalAppAccess.DATE_FORMAT_LOCAL));
 
+        ArrayList<Integer> notiOrderNumbers = MydApplication.getInstance().getPrefManger().getNotiOrderNumber();
+
+        if(notiOrderNumbers.contains(rawStock.getOrderNumber())){
+            holder.tv_new.setVisibility(View.VISIBLE);
+        }else{
+            holder.tv_new.setVisibility(View.GONE);
+        }
 
         if (position % 2 == 0)
             holder.item_container.setBackgroundColor(ContextCompat.getColor(holder.item_container.getContext(), R.color.gray_lightest));

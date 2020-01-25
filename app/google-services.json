@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "296337603186",
+    "firebase_url": "https://courier-ab526.firebaseio.com",
+    "project_id": "courier-ab526",
+    "storage_bucket": "courier-ab526.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296337603186:android:f68afe5f239699809e20eb",
+        "android_client_info": {
+          "package_name": "com.example.courierservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "296337603186-u6bvoqklhug92n3h06a7hevq9d940qdr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxeko0Rm5FDsrKwtdBBRayapJzX57XtZs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "296337603186-u6bvoqklhug92n3h06a7hevq9d940qdr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

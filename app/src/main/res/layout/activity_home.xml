@@ -41,8 +41,15 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_search" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OnGoing"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -54,8 +61,50 @@
             android:background="@color/black" />
 
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/btn_pending"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:background="@color/gray_light"
+
+            >
+
+
+
+
+            <TextView
+                android:id="@+id/tv_pending_frag_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_notification_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_pending_frag_label"
+                android:background="@drawable/circle_background_history"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/black" />
+
+
+        <LinearLayout
+            android:id="@+id/btn_completed"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -66,12 +115,19 @@
 
 
             <ImageView
-                android:id="@+id/img_admin"
+                android:id="@+id/img_completed"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_comment" />
-        </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Completed"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

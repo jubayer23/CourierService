@@ -21,7 +21,11 @@ import com.example.courierservice.alertbanner.AlertDialogForAnything;
 import com.example.courierservice.appdata.DummyResponse;
 import com.example.courierservice.appdata.GlobalAppAccess;
 import com.example.courierservice.appdata.MydApplication;
+import com.example.courierservice.firebase.FirebaseToken;
+import com.example.courierservice.firebase.FirebaseTokenUpdateIntentService;
 import com.example.courierservice.model.User;
+import com.example.courierservice.service.LocationUpdateService;
+import com.example.courierservice.service.ServiceUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +40,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if(MydApplication.getInstance().getPrefManger().getUser() != null){
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+            return;
+        }
+
         init();
+
+        if (ServiceUtils.isMyServiceRunning(LocationUpdateService.class, LoginActivity.this)) {
+            stopService(new Intent(this, LocationUpdateService.class));
+        }
 
         RunnTimePermissions.requestForAllRuntimePermissions(this);
     }
@@ -74,11 +88,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 CommonMethods.hideKeyboardForcely(this, ed_username);
                 CommonMethods.hideKeyboardForcely(this, ed_password);
 
-                String deviceId = DeviceInfoUtils.getDeviceImieNumber(this);
+               final String deviceId = DeviceInfoUtils.getDeviceImieNumber(this);
 
                 //saveCache(ed_email.getText().toString());
 
-                sendRequestForLogin(GlobalAppAccess.URL_LOGIN, ed_username.getText().toString(), ed_password.getText().toString(),deviceId);
+                showProgressDialog("Loading..", true, false);
+
+                FirebaseToken firebaseToken = new FirebaseToken();
+                firebaseToken.getFirebaseToken(new FirebaseToken.FirebaseTokenResult() {
+                    @Override
+                    public void gotToekn(String token) {
+                        Intent intent = new Intent(LoginActivity.this, FirebaseTokenUpdateIntentService.class);
+                        // add infos for the service which file to download and where to store
+                        intent.putExtra("firebase_token", token);
+                        startService(intent);
+                        sendRequestForLogin(GlobalAppAccess.URL_LOGIN, ed_username.getText().toString(), ed_password.getText().toString(),deviceId);
+                    }
+                });
+
+
                 //startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
         }
@@ -163,7 +191,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 dismissProgressDialog();
 
-                Log.d("debug", error.getMessage().toString());
+//                Log.d("debug", error.getMessage().toString());
 
                 AlertDialogForAnything.showAlertDialogWhenComplte(LoginActivity.this, "Error", "Network problem. please try again!", false);
 

@@ -3,16 +3,13 @@ package com.example.courierservice.fragment.dialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 
 
 import com.android.volley.AuthFailureError;
@@ -22,24 +19,24 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.courierservice.R;
 import com.example.courierservice.Utility.UserLastKnowLocationFused;
-import com.example.courierservice.appdata.DummyResponse;
 import com.example.courierservice.appdata.GlobalAppAccess;
 import com.example.courierservice.appdata.MydApplication;
 import com.example.courierservice.fragment.BaseDialogFragment;
 import com.example.courierservice.fragment.PendingFragment;
 import com.example.courierservice.model.PendingOrder;
-import com.example.courierservice.model.PendingOrders;
 import com.example.courierservice.service.LocationUpdateService;
+import com.example.courierservice.service.ServiceUtils;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class StartOrderDialogFragment extends BaseDialogFragment implements View.OnClickListener {
 
-    private PendingOrder shopStock;
+    private PendingOrder pendingOrder;
 
     private Button btn_cancel, btn_confirm;
+
+
 
 
 
@@ -49,7 +46,7 @@ public class StartOrderDialogFragment extends BaseDialogFragment implements View
 
         if (getArguments() != null) {
 
-            shopStock = getArguments().getParcelable("pendingOrder");
+            pendingOrder = getArguments().getParcelable("pendingOrder");
 
         }
 
@@ -81,6 +78,8 @@ public class StartOrderDialogFragment extends BaseDialogFragment implements View
         int id = v.getId();
 
         if(id == R.id.btn_cancel){
+
+            dismiss();
 
         }
 
@@ -121,7 +120,7 @@ public class StartOrderDialogFragment extends BaseDialogFragment implements View
                             getActivity().startService(new Intent(getActivity(), LocationUpdateService.class));
 
                             //int qtyDelivered = binding.getViewModel().getProductQuantityDelivered();
-                            // int totalQty = Integer.parseInt(shopStock.getQuantity());
+                            // int totalQty = Integer.parseInt(pendingOrder.getQuantity());
 
                             // stockFragment.refreshScreen(totalQty - qtyDelivered);
                         }
@@ -136,14 +135,24 @@ public class StartOrderDialogFragment extends BaseDialogFragment implements View
                 //Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
 
                 //comment out below code
-                PendingFragment stockFragment = ((PendingFragment) getTargetFragment());
-                if (null != stockFragment) {
+                PendingFragment targetFragment = ((PendingFragment) getTargetFragment());
+                if (null != targetFragment) {
 
-                    getActivity().stopService(new Intent(getActivity(), LocationUpdateService.class));
-                    getActivity().startService(new Intent(getActivity(), LocationUpdateService.class));
+                    if (ServiceUtils.isMyServiceRunning(LocationUpdateService.class, getActivity())) {
+                        getActivity().stopService(new Intent(getActivity(), LocationUpdateService.class));
+                    } else {
+                        getActivity().startService(new Intent(getActivity(), LocationUpdateService.class));
+                    }
+
+                    targetFragment.onConfirmOrderStart(pendingOrder);
+
+                    dismiss();
+
+                   // getActivity().stopService(new Intent(getActivity(), LocationUpdateService.class));
+                    //getActivity().startService(new Intent(getActivity(), LocationUpdateService.class));
 
                     //int qtyDelivered = binding.getViewModel().getProductQuantityDelivered();
-                    // int totalQty = Integer.parseInt(shopStock.getQuantity());
+                    // int totalQty = Integer.parseInt(pendingOrder.getQuantity());
 
                     // stockFragment.refreshScreen(totalQty - qtyDelivered);
                 }
@@ -155,8 +164,8 @@ public class StartOrderDialogFragment extends BaseDialogFragment implements View
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("driverId", MydApplication.getInstance().getPrefManger().getUserInfo().getId().toString());
-                params.put("orderId", shopStock.getOrderNumber().toString());
+                params.put("driverId", MydApplication.getInstance().getPrefManger().getUser().getId().toString());
+                params.put("orderId", pendingOrder.getOrderNumber().toString());
                 params.put("latitude", String.valueOf(location.getLatitude()));
                 params.put("longitude", String.valueOf(location.getLongitude()));
                 params.put("status", "start");

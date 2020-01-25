@@ -159,9 +159,11 @@ public class LocationUpdateService extends Service {
         super.onDestroy();
         //Log.v("STOP_SERVICE", "DONE");
 
-        mWakeLock.release();
+        Log.i(TAG, "on destroy called");
 
-       removeLocationUpdates();
+        //mWakeLock.release();
+
+       //removeLocationUpdates();
 
         //stopSelf();
     }

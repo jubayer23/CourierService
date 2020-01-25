@@ -74,6 +74,10 @@ public class PendingOrder implements Parcelable
 
     private final static long serialVersionUID = 476684227061011180L;
 
+    public PendingOrder(){
+
+    }
+
     protected PendingOrder(Parcel in) {
         if (in.readByte() == 0) {
             id = null;

@@ -5,6 +5,7 @@ package com.example.courierservice.appdata;
 
 public class GlobalAppAccess {
 
+    public static final String KEY_ORDER_NOTIFICATION = "notification_order";
     private static final String BASE_URL = "https://IPS-Systems.com";
 
     public static final String URL_LOGIN = BASE_URL + "/driverLogin";
@@ -15,7 +16,8 @@ public class GlobalAppAccess {
 
 
 
-    public static final String DATE_FORMAT_LOCAL = "hh:mmaa dd MMM yyyy";
+    //public static final String DATE_FORMAT_LOCAL = "hh:mmaa dd MMM yyyy";
+    public static final String DATE_FORMAT_LOCAL = "dd MMM yyyy HH:mm";
 
     public static final  int SUCCESS = 1;
     public static  final  int ERROR = 0;
